@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Jhuli — গ্যাজেটের ঝুলি</title>
+<meta name="description" content="Tech Jhuli — আপনার প্রয়োজনীয় সব গ্যাজেট, এক জায়গায়।">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0A1F;
+    --bg-soft: #130F2E;
+    --card: #17143A;
+    --card-hi: #1E1948;
+    --violet: #7C3AED;
+    --cyan: #22D3EE;
+    --pink: #FF3D81;
+    --yellow: #FFD23F;
+    --text: #F5F4FF;
+    --muted: #A9A6C4;
+    --line: rgba(255,255,255,0.08);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(124,58,237,0.35), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(34,211,238,0.18), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Hind Siliguri','Sora',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  .font-display{font-family:'Sora','Hind Siliguri',sans-serif;}
+  .font-mono{font-family:'JetBrains Mono',monospace;}
+
+  a{color:inherit;text-decoration:none;}
+
+  ::selection{background:var(--pink);color:#fff;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    backdrop-filter: blur(14px);
+    background:rgba(11,10,31,0.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{
+    max-width:1180px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Sora',sans-serif; font-weight:800; font-size:1.3rem; letter-spacing:-0.02em;
+  }
+  .logo-badge{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(135deg,var(--violet),var(--pink));
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem; box-shadow:0 6px 18px rgba(124,58,237,0.5);
+    transform:rotate(-6deg);
+  }
+  .logo span.accent{color:var(--yellow);}
+
+  nav.cats{
+    display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;
+  }
+  .cat-btn{
+    font-family:'Hind Siliguri',sans-serif; font-size:0.85rem; font-weight:600;
+    padding:8px 16px; border-radius:999px; border:1px solid var(--line);
+    background:transparent; color:var(--muted); cursor:pointer;
+    transition:all .2s ease; white-space:nowrap;
+  }
+  .cat-btn:hover{ color:var(--text); border-color:rgba(255,255,255,0.25); }
+  .cat-btn.active{
+    background:linear-gradient(135deg,var(--violet),var(--pink));
+    color:#fff; border-color:transparent;
+    box-shadow:0 4px 16px rgba(255,61,129,0.35);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:1180px; margin:0 auto; padding:64px 24px 40px;
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:40px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:0.75rem; letter-spacing:0.12em;
+    color:var(--cyan); text-transform:uppercase; margin-bottom:18px;
+    border:1px solid rgba(34,211,238,0.35); padding:6px 12px; border-radius:999px;
+    background:rgba(34,211,238,0.07);
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan); animation:blink 1.6s infinite;}
+  @keyframes blink{50%{opacity:0.3;}}
+
+  h1.hero-title{
+    font-family:'Sora',sans-serif; font-weight:800; letter-spacing:-0.03em;
+    font-size:clamp(2.4rem, 5.5vw, 4rem); line-height:1.04; margin-bottom:20px;
+  }
+  h1.hero-title .grad{
+    background:linear-gradient(100deg,var(--pink),var(--yellow) 55%,var(--cyan));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.sub{
+    color:var(--muted); font-size:1.05rem; max-width:46ch; margin-bottom:28px; line-height:1.7;
+  }
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn-primary{
+    background:linear-gradient(135deg,var(--violet),var(--pink));
+    color:#fff; font-weight:700; padding:14px 26px; border-radius:14px;
+    box-shadow:0 10px 30px rgba(124,58,237,0.4); border:none; cursor:pointer;
+    font-family:'Hind Siliguri',sans-serif; font-size:1rem;
+    transition:transform .2s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{
+    padding:14px 24px; border-radius:14px; border:1px solid var(--line); color:var(--text);
+    font-weight:600; font-size:1rem;
+  }
+  .hero-stats{display:flex; gap:28px; margin-top:36px;}
+  .stat b{display:block; font-family:'Sora',sans-serif; font-size:1.6rem; font-weight:800;}
+  .stat span{color:var(--muted); font-size:0.82rem;}
+
+  /* hero visual: orbiting gadget tags */
+  .hero-visual{position:relative; height:380px; display:flex; align-items:center; justify-content:center;}
+  .orb-core{
+    width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #fff6, transparent 40%), linear-gradient(135deg,var(--violet),var(--pink));
+    box-shadow:0 0 80px rgba(255,61,129,0.45), 0 0 140px rgba(124,58,237,0.3);
+    position:relative; z-index:2;
+    display:flex;align-items:center;justify-content:center;
+    font-size:2.6rem;
+    animation:pulse 3.2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+  .ring{
+    position:absolute; border:1px dashed rgba(255,255,255,0.15); border-radius:50%;
+  }
+  .ring1{width:260px;height:260px; animation:spin 22s linear infinite;}
+  .ring2{width:340px;height:340px; animation:spin 34s linear infinite reverse;}
+  @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+  .float-tag{
+    position:absolute; background:var(--card); border:1px solid var(--line);
+    padding:8px 14px; border-radius:12px; font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem; font-weight:700; display:flex; align-items:center; gap:8px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4); backdrop-filter:blur(6px);
+    animation:float 5s ease-in-out infinite;
+  }
+  .float-tag em{font-style:normal; font-size:1.05rem;}
+  .ft1{top:6%; left:2%; color:var(--cyan); animation-delay:0s;}
+  .ft2{bottom:10%; left:6%; color:var(--yellow); animation-delay:1.2s;}
+  .ft3{top:14%; right:0%; color:var(--pink); animation-delay:0.6s;}
+  .ft4{bottom:2%; right:10%; color:#9CFF7A; animation-delay:1.8s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+  /* ---------- PRODUCTS ---------- */
+  .section-head{
+    max-width:1180px; margin:60px auto 28px; padding:0 24px;
+    display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+  .section-head h2{
+    font-family:'Sora',sans-serif; font-weight:800; font-size:1.8rem; letter-spacing:-0.02em;
+  }
+  .section-head p{color:var(--muted); font-size:0.9rem;}
+
+  .grid{
+    max-width:1180px; margin:0 auto; padding:0 24px 100px;
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:22px;
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
+    transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,255,255,0.18);
+    box-shadow:0 20px 45px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.05);
+  }
+  .card-media{
+    position:relative; aspect-ratio:1/1; overflow:hidden; background:#0d0b24;
+  }
+  .card-media img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .card:hover .card-media img{transform:scale(1.08);}
+  .card-cat{
+    position:absolute; top:12px; left:12px;
+    font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:700;
+    padding:5px 10px; border-radius:999px; letter-spacing:0.04em;
+    background:rgba(11,10,31,0.75); backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,0.15);
+  }
+  .price-tag{
+    position:absolute; top:10px; right:-6px;
+    background:var(--yellow); color:#1a1330;
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.85rem;
+    padding:7px 14px 7px 12px; border-radius:8px 2px 2px 8px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.4);
+    transform:rotate(4deg);
+  }
+  .price-tag::after{
+    content:''; position:absolute; left:-6px; top:50%; transform:translateY(-50%);
+    width:10px;height:10px;border-radius:50%; background:var(--bg);
+    box-shadow:2px 0 0 rgba(255,255,255,0.25) inset;
+  }
+  .card-body{ padding:16px 18px 20px; display:flex; flex-direction:column; gap:6px; flex:1;}
+  .card-name{font-family:'Sora',sans-serif; font-weight:700; font-size:1.05rem; line-height:1.3;}
+  .card-tagline{color:var(--muted); font-size:0.86rem; line-height:1.5; flex:1;}
+  .card-foot{
+    display:flex; align-items:center; justify-content:space-between; margin-top:10px;
+    padding-top:12px; border-top:1px dashed var(--line);
+  }
+  .card-warranty{font-size:0.76rem; color:var(--cyan); font-weight:600;}
+  .card-cta{
+    font-size:0.8rem; font-weight:700; color:var(--text);
+    display:flex; align-items:center; gap:4px;
+  }
+  .card-cta svg{width:14px;height:14px; transition:transform .2s;}
+  .card:hover .card-cta svg{transform:translateX(4px);}
+
+  /* ---------- MODAL ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(6,5,18,0.82); backdrop-filter:blur(6px);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .overlay.open{display:flex; animation:fadeIn .2s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  .modal{
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:24px;
+    max-width:880px; width:100%; max-height:88vh; overflow:auto;
+    display:grid; grid-template-columns: 1fr 1fr;
+    position:relative;
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);
+    animation:pop .25s ease;
+  }
+  @keyframes pop{from{transform:scale(0.96); opacity:0;}to{transform:scale(1); opacity:1;}}
+  @media(max-width:720px){ .modal{grid-template-columns:1fr;} }
+
+  .modal-close{
+    position:absolute; top:14px; right:14px; z-index:5;
+    width:38px;height:38px;border-radius:50%; border:none;
+    background:rgba(0,0,0,0.5); color:#fff; font-size:1.2rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    backdrop-filter:blur(6px);
+  }
+  .modal-media{ background:#0d0b24; position:relative; min-height:280px;}
+  .modal-media img{width:100%; height:100%; object-fit:cover; display:block; min-height:280px;}
+  .modal-price-tag{
+    position:absolute; bottom:16px; left:16px;
+    background:var(--yellow); color:#1a1330; font-family:'JetBrains Mono',monospace;
+    font-weight:800; font-size:1.15rem; padding:10px 18px; border-radius:8px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.4); transform:rotate(-2deg);
+  }
+  .modal-info{ padding:32px 30px; display:flex; flex-direction:column;}
+  .modal-cat{
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; letter-spacing:0.08em;
+    color:var(--cyan); text-transform:uppercase; margin-bottom:10px;
+  }
+  .modal-title{font-family:'Sora',sans-serif; font-weight:800; font-size:1.5rem; margin-bottom:6px; line-height:1.25;}
+  .modal-warranty{
+    display:inline-flex; align-items:center; gap:6px; width:fit-content;
+    background:rgba(255,61,129,0.12); color:var(--pink); border:1px solid rgba(255,61,129,0.3);
+    padding:6px 12px; border-radius:999px; font-size:0.78rem; font-weight:700; margin:12px 0 18px;
+  }
+  .modal-feat{ list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:22px;}
+  .modal-feat li{ font-size:0.92rem; color:#DCDAF0; line-height:1.55; display:flex; gap:10px;}
+  .modal-feat li::before{
+    content:''; min-width:6px;height:6px;border-radius:50%;
+    background:var(--yellow); margin-top:7px;
+  }
+  .modal-order{
+    margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; padding-top:10px;
+  }
+
+  footer{
+    border-top:1px solid var(--line); padding:34px 24px; text-align:center;
+    color:var(--muted); font-size:0.85rem;
+  }
+  footer .fname{color:var(--text); font-weight:700; font-family:'Sora',sans-serif;}
+
+  @media(max-width:860px){
+    .hero{grid-template-columns:1fr; padding-top:36px;}
+    .hero-visual{height:260px;}
+    .nav-wrap{flex-direction:column; align-items:flex-start;}
+    nav.cats{justify-content:flex-start; width:100%;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="logo">
+      <span class="logo-badge">🎒</span>
+      Tech <span class="accent">Jhuli</span>
+    </div>
+    <nav class="cats" id="catNav">
+      <!-- filled by JS -->
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow"><span class="dot"></span> গ্যাজেট শপ · ঢাকা থেকে সারা বাংলাদেশে ডেলিভারি</div>
+    <h1 class="hero-title">তোমার প্রয়োজনীয়<br>প্রতিটা <span class="grad">গ্যাজেট</span>,<br>এক ঝুলিতে।</h1>
+    <p class="sub">পাওয়ার ব্যাংক থেকে মিনি ফ্যান, ফ্ল্যাশলাইট থেকে মিনি UPS — Tech Jhuli-তে পাবেন অরিজিনাল প্রোডাক্ট, সঠিক দামে, ওয়ারেন্টিসহ।</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">প্রোডাক্ট দেখুন ↓</a>
+      <a href="#footer-contact" class="btn-ghost">অর্ডার করতে যোগাযোগ করুন</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b id="statCount">9</b><span>প্রোডাক্ট</span></div>
+      <div class="stat"><b>১০০%</b><span>অরিজিনাল</span></div>
+      <div class="stat"><b>দ্রুত</b><span>হোম ডেলিভারি</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="ring ring1"></div>
+    <div class="ring ring2"></div>
+    <div class="orb-core">⚡</div>
+    <div class="float-tag ft1"><em>🔋</em> ২০,০০০mAh</div>
+    <div class="float-tag ft2"><em>🌀</em> ৩ স্পিড ফ্যান</div>
+    <div class="float-tag ft3"><em>🔦</em> ভিনটেজ লাইট</div>
+    <div class="float-tag ft4"><em>🚗</em> রিমোট টয় কার</div>
+  </div>
+</section>
+
+<div class="section-head" id="products">
+  <h2>সব প্রোডাক্ট</h2>
+  <p>ক্লিক করে দেখুন পুরো বিবরণ ও দাম</p>
+</div>
+
+<div class="grid" id="productGrid"></div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-media" id="modalMedia"></div>
+    <div class="modal-info" id="modalInfo"></div>
+  </div>
+</div>
+
+<footer id="footer-contact">
+  <div class="fname">Tech Jhuli</div>
+  <p style="margin-top:6px;">অর্ডার করতে বা যেকোনো জিজ্ঞাসায় ইনবক্স করুন আমাদের পেজে — WhatsApp / Facebook।</p>
+  <p style="margin-top:14px; opacity:0.6; font-size:0.78rem;">© <span id="year"></span> Tech Jhuli. All rights reserved.</p>
+</footer>
+
+<script>
+  const products = [
+    {
+      id: 1,
+      name: "X10 Laser Flash Light",
+      price: 890,
+      category: "লাইট",
+      catKey: "light",
+      image: "images/X10_Laser_Flash_Light_.jpg",
+      tagline: "শক্তিশালী লেজার আলো, ২ভাবে ব্যবহার — টর্চলাইট ও টেবিল ল্যাম্প",
+      warranty: "৩ মাস ওয়ারেন্টি",
+      features: [
+        "Laser LED অনেক দূর পর্যন্ত শক্তিশালী আলো",
+        "Zoom In-Out সুবিধা",
+        "Vintage Warm Light মোড",
+        "Flashlight ও Table Light — ২ ভাবে ব্যবহারযোগ্য",
+        "3600mAh লিথিয়াম ব্যাটারি",
+        "Flashlight মুডে সর্বোচ্চ ২–৫ ঘণ্টা ব্যাকআপ",
+        "Vintage মুডে ১০ ঘণ্টা+ ব্যাকআপ",
+        "মাল্টি-মোড: Low, High ও SOS",
+        "একটি বাটন দিয়েই সহজ নিয়ন্ত্রণ",
+        "Transparent, মজবুত ও টেকসই বডি"
+      ]
+    },
+    {
+      id: 2,
+      name: "Toy Car",
+      price: 1790,
+      category: "টয়",
+      catKey: "toy",
+      image: "images/Toy_Car.jpg",
+      tagline: "জেসচার কন্ট্রোলে চলা মজার রিমোট কন্ট্রোল গাড়ি — বাচ্চাদের প্রিয় উপহার",
+      warranty: "৬ মাস ওয়ারেন্টি",
+      features: [
+        "রিমোট কন্ট্রোল ড্রাইভিং",
+        "হ্যান্ড জেসচার / ইনডাকশন কন্ট্রোল",
+        "ফলো ও ডজ মোড",
+        "লাইন প্যাট্রোল মোড",
+        "অটো ডেমো ফাংশন",
+        "সাউন্ড ও মিউজিক ইফেক্ট",
+        "রিচার্জেবল ব্যাটারি",
+        "ছোট ও কমপ্যাক্ট ডিজাইন — ঘরে খেলার জন্য উপযুক্ত",
+        "জন্মদিনের সারপ্রাইজ বা উপহার হিসেবে দারুণ"
+      ]
+    },
+    {
+      id: 3,
+      name: "QCY PB20A Power Bank",
+      price: 3150,
+      category: "পাওয়ার ব্যাংক",
+      catKey: "powerbank",
+      image: "images/QCY_PB20A_power_bank.jpg",
+      tagline: "৪৫W PD QC ফাস্ট চার্জিং পাওয়ার ব্যাংক, বিল্ট-ইন Type-C ক্যাবলসহ",
+      warranty: "১২ মাস অফিশিয়াল ওয়ারেন্টি",
+      features: [
+        "45W PD QC Fast Charging",
+        "সব ডিভাইসে ফাস্ট চার্জ হয়",
+        "বিল্ট-ইন Type-C ক্যাবল",
+        "45W আউটপুট Type-C পোর্ট",
+        "22.5W আউটপুট USB-A পোর্ট",
+        "Safety Certified (CE)",
+        "LED Power Display"
+      ]
+    },
+    {
+      id: 4,
+      name: "Awei PA92 Power Bank",
+      price: 1580,
+      category: "পাওয়ার ব্যাংক",
+      catKey: "powerbank",
+      image: "images/Awei_PA92_power_bank.jpg",
+      tagline: "২০,০০০mAh বড় ক্যাপাসিটি, প্রিমিয়াম ম্যাট বডি — বিমানে ক্যারি করা যায়",
+      warranty: "৬ মাস অফিশিয়াল ওয়ারেন্টি",
+      features: [
+        "20000mAh Capacity",
+        "22.5W PD QC Fast Charging",
+        "২টি Type-C এবং ১টি USB-A পোর্ট",
+        "Safety Certified",
+        "LED Power Display",
+        "Matte Body — সহজে দাগ পড়ে না",
+        "Premium Build Quality",
+        "বিমানে ক্যারি করা যায়"
+      ]
+    },
+    {
+      id: 5,
+      name: "Solove F5 Pro MAX Fan",
+      price: 3450,
+      category: "ফ্যান",
+      catKey: "fan",
+      image: "images/Solove_F5_Pro_MAX_Fan.jpg",
+      tagline: "৩০ ঘণ্টা পর্যন্ত ব্যাকআপ, ৩০ ইঞ্চি পর্যন্ত লম্বা করা যায় — একদম নিঃশব্দ",
+      warranty: "৩ মাস ওয়ারেন্টি",
+      features: [
+        "সর্বোচ্চ ৩০ ঘণ্টা Low Speed-এ ব্যাকআপ",
+        "সর্বোচ্চ ২০ ঘণ্টা Medium Speed-এ ব্যাকআপ",
+        "সর্বোচ্চ ১২ ঘণ্টা Full Speed-এ ব্যাকআপ",
+        "ফ্যানটি ৩০ ইঞ্চি পর্যন্ত লম্বা করা যায়",
+        "৩টি স্পিড মোড",
+        "ডানে-বামে ঘুরে বাতাস দেওয়ার সুবিধা",
+        "ফোনের Type-C চার্জার দিয়ে চার্জ হয়",
+        "নিঃশব্দ ঠান্ডা বাতাস",
+        "সারা বাংলাদেশে হোম ডেলিভারি"
+      ]
+    },
+    {
+      id: 6,
+      name: "Jysuper 2570 Fan",
+      price: 1790,
+      category: "ফ্যান",
+      catKey: "fan",
+      image: "images/Jysuper_2570_Fan.jpg",
+      tagline: "RGB লাইটসহ শক্তিশালী রিচার্জেবল ফ্যান, ৪টি স্পিড মোড",
+      warranty: "৭ দিনের রিপ্লেসমেন্ট গ্যারান্টি",
+      features: [
+        "8000mAh লিথিয়াম ব্যাটারি (খোলা যায়)",
+        "প্রথম স্পিডে সর্বোচ্চ ২০ ঘণ্টা ব্যাকআপ",
+        "দ্বিতীয় স্পিডে সর্বোচ্চ ১৪ ঘণ্টা ব্যাকআপ",
+        "তৃতীয় স্পিডে সর্বোচ্চ ১০ ঘণ্টা ব্যাকআপ",
+        "ফুল স্পিডে সর্বোচ্চ ৬.৫ ঘণ্টা ব্যাকআপ",
+        "সাদা এবং RGB লাইট রয়েছে",
+        "Brushless Motor ও বড় পাখার ফ্যান",
+        "৪টি মোডে স্পিড কন্ট্রোল",
+        "অটোমেটিক ডানে-বামে ঘোরে",
+        "৪টি মোডে টাইম সেট করা যায়",
+        "মাথা উপর-নিচ করা যায়",
+        "Type-C ও Micro USB — ২টি চার্জিং পোর্ট"
+      ]
+    },
+    {
+      id: 7,
+      name: "Jysuper 2218 Fan",
+      price: 990,
+      category: "ফ্যান",
+      catKey: "fan",
+      image: "images/Jysuper_2218_Fan.jpg",
+      tagline: "পোর্টেবল, হুক সিস্টেমে ঝুলিয়ে ব্যবহারযোগ্য — ভ্রমণের সঙ্গী",
+      warranty: "৭ দিনের রিপ্লেসমেন্ট গ্যারান্টি",
+      features: [
+        "4000mAh লিথিয়াম ব্যাটারি",
+        "প্রথম স্পিডে সর্বোচ্চ ১০ ঘণ্টা ব্যাকআপ",
+        "দ্বিতীয় স্পিডে সর্বোচ্চ ৫ ঘণ্টা ব্যাকআপ",
+        "ফুল স্পিডে সর্বোচ্চ ৩ ঘণ্টা ব্যাকআপ",
+        "Brushless Motor — শব্দ ছাড়া বাতাস",
+        "৩টি মোডে স্পিড কন্ট্রোল",
+        "অটোমেটিক ডানে-বামে ঘোরে",
+        "প্রতিটি পার্ট খুলে ব্যাগে নেওয়া যায়",
+        "হুক সিস্টেমে ঝুলিয়ে ব্যবহার করা যায়",
+        "Type-C ও Micro USB — ২টি চার্জিং পোর্ট"
+      ]
+    },
+    {
+      id: 8,
+      name: "Unikyy Turbo Fan",
+      price: 1250,
+      category: "ফ্যান",
+      catKey: "fan",
+      image: "images/Unikyy_Turbo_Fan.jpg",
+      tagline: "ডিসপ্লেসহ কমপ্যাক্ট হ্যান্ডহেল্ড ফ্যান, গলায় ঝোলানো যায়",
+      warranty: "৬ মাস অফিশিয়াল ওয়ারেন্টি",
+      features: [
+        "3600mAh ব্যাটারি",
+        "৫টি মোডে স্পিড কন্ট্রোল",
+        "প্রথম স্পিডে সর্বোচ্চ ৮ ঘণ্টা ব্যাকআপ",
+        "দ্বিতীয় স্পিডে সর্বোচ্চ ৬ ঘণ্টা ব্যাকআপ",
+        "তৃতীয় স্পিডে সর্বোচ্চ ৪ ঘণ্টা ব্যাকআপ",
+        "চতুর্থ স্পিডে সর্বোচ্চ ৩ ঘণ্টা ব্যাকআপ",
+        "ফুল স্পিডে সর্বোচ্চ ২ ঘণ্টা ব্যাকআপ",
+        "ফ্যানের সাথে ডিসপ্লে রয়েছে",
+        "স্পিড কন্ট্রোলের জন্য একটি বাটন",
+        "চার্জিংয়ের জন্য Type-C পোর্ট",
+        "গলায় ঝোলানোর ফিতা রয়েছে",
+        "১৮০ ডিগ্রি রোটেট করা যায়",
+        "খুবই কমপ্যাক্ট — হাতে রেখেও ব্যবহারযোগ্য",
+        "UNIKYY ব্র্যান্ডের প্রোডাক্ট — কোয়ালিটি নিশ্চিত"
+      ]
+    },
+    {
+      id: 9,
+      name: "SKE POE 36e Mini UPS",
+      price: 3790,
+      category: "মিনি UPS",
+      catKey: "ups",
+      image: "images/SKE_POE_36e_Mini_UPS.jpg",
+      tagline: "রাউটার, ক্যামেরা ও ডিজিটাল ডিভাইসের জন্য নির্ভরযোগ্য মিনি DC UPS ব্যাকআপ",
+      warranty: "১ বছর ওয়ারেন্টি",
+      features: [
+        "20000mAh LFP (LiFePO4) হাই-ক্যাপাসিটি ব্যাটারি — দীর্ঘ ব্যাকআপ টাইম",
+        "মার্কেটের প্রায় সব ডিজিটাল ডিভাইসের সাথে কম্প্যাটিবল",
+        "USB 5V আউটপুট — মোবাইল ও অন্যান্য USB ডিভাইস চার্জ করা যায়",
+        "Power Over Ethernet (PoE) — ২৪V পাওয়ার ও ডেটা একসাথে ট্রান্সমিট",
+        "ওভার-চার্জিং, ওভার-ডিসচার্জিং ও শর্ট সার্কিট থেকে ইন্টেলিজেন্ট প্রোটেকশন",
+        "ওয়াইড AC ভোল্টেজ ইনপুট (100–240V) সহ বিল্ট-ইন অ্যাডাপ্টার",
+        "বাসা ও অফিসের জন্য স্টেবল ও নির্ভরযোগ্য পাওয়ার সলিউশন"
+      ]
+    }
+  ];
+
+  const categories = [
+    { key: "all", label: "সব প্রোডাক্ট" },
+    { key: "powerbank", label: "পাওয়ার ব্যাংক" },
+    { key: "fan", label: "ফ্যান" },
+    { key: "light", label: "লাইট" },
+    { key: "toy", label: "টয়" },
+    { key: "ups", label: "মিনি UPS" },
+  ];
+
+  const catNav = document.getElementById('catNav');
+  const grid = document.getElementById('productGrid');
+  const overlay = document.getElementById('overlay');
+  const modalMedia = document.getElementById('modalMedia');
+  const modalInfo = document.getElementById('modalInfo');
+  const modalClose = document.getElementById('modalClose');
+
+  document.getElementById('statCount').textContent = products.length;
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  let activeCat = 'all';
+
+  function fmtPrice(n){
+    return '৳' + n.toLocaleString('en-US');
+  }
+
+  function renderCats(){
+    catNav.innerHTML = categories.map(c =>
+      `<button class="cat-btn ${c.key===activeCat?'active':''}" data-cat="${c.key}">${c.label}</button>`
+    ).join('');
+    catNav.querySelectorAll('.cat-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        activeCat = btn.dataset.cat;
+        renderCats();
+        renderGrid();
+      });
+    });
+  }
+
+  function renderGrid(){
+    const list = activeCat === 'all' ? products : products.filter(p=>p.catKey===activeCat);
+    grid.innerHTML = list.map(p => `
+      <div class="card" data-id="${p.id}">
+        <div class="card-media">
+          <span class="card-cat">${p.category}</span>
+          <span class="price-tag">${fmtPrice(p.price)}</span>
+          <img src="${p.image}" alt="${p.name}" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-name">${p.name}</div>
+          <div class="card-tagline">${p.tagline}</div>
+          <div class="card-foot">
+            <span class="card-warranty">${p.warranty}</span>
+            <span class="card-cta">বিস্তারিত
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('click', ()=> openModal(Number(card.dataset.id)));
+    });
+  }
+
+  function openModal(id){
+    const p = products.find(x=>x.id===id);
+    if(!p) return;
+    modalMedia.innerHTML = `<img src="${p.image}" alt="${p.name}"><span class="modal-price-tag">${fmtPrice(p.price)}</span>`;
+    modalInfo.innerHTML = `
+      <div class="modal-cat">${p.category}</div>
+      <div class="modal-title">${p.name}</div>
+      <div class="modal-warranty">🛡️ ${p.warranty}</div>
+      <ul class="modal-feat">
+        ${p.features.map(f=>`<li>${f}</li>`).join('')}
+      </ul>
+      <div class="modal-order">
+        <a class="btn-primary" href="#footer-contact" onclick="document.getElementById('overlay').classList.remove('open')">অর্ডার করুন — ${fmtPrice(p.price)}</a>
+      </div>
+    `;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+  renderCats();
+  renderGrid();
+</script>
+
+</body>
+</html>
